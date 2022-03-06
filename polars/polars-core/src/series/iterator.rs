@@ -1,7 +1,6 @@
 use crate::prelude::any_value::arr_to_any_value;
 use crate::prelude::*;
 use crate::utils::NoNull;
-use std::iter::FromIterator;
 
 macro_rules! from_iterator {
     ($native:ty, $variant:ident) => {
@@ -60,11 +59,18 @@ impl FromIterator<String> for Series {
 
 #[cfg(feature = "rows")]
 impl Series {
-    pub(crate) fn iter(&self) -> impl Iterator<Item = AnyValue> {
-        assert_eq!(self.chunks().len(), 1, "impl error");
+    pub fn iter(&self) -> SeriesIter<'_> {
         let dtype = self.dtype();
-
-        let arr = &*self.chunks()[0];
+        let arr = match dtype {
+            DataType::Struct(_) => {
+                let ca = self.struct_().unwrap();
+                &**ca.arrow_array()
+            }
+            _ => {
+                assert_eq!(self.chunks().len(), 1, "impl error");
+                &*self.chunks()[0]
+            }
+        };
         let len = arr.len();
         SeriesIter {
             arr,
@@ -95,7 +101,13 @@ impl<'a> Iterator for SeriesIter<'a> {
             unsafe { Some(arr_to_any_value(self.arr, idx, self.dtype)) }
         }
     }
+
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        (self.len, Some(self.len))
+    }
 }
+
+impl ExactSizeIterator for SeriesIter<'_> {}
 
 #[cfg(test)]
 mod test {
