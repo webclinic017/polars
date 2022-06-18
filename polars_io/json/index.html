@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="(De)serialize JSON files."><meta name="keywords" content="rust, rustlang, rust-lang, json"><title>polars_io::json - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script>
+    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../polars_io/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../polars_io/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Module json</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#types">Type Definitions</a></li></ul></div></section><div id="sidebar-vars" data-name="json" data-ty="mod" data-relpath="./"></div><script defer src="./sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../polars_io/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Module <a href="../index.html">polars_io</a>::<wbr><a class="mod" href="#">json</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../src/polars_io/json.rs.html#1-284">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="deserialize-json-files"><a href="#deserialize-json-files">(De)serialize JSON files.</a></h2><h3 id="read-json-to-a-dataframe"><a href="#read-json-to-a-dataframe">Read JSON to a DataFrame</a></h3><h3 id="example"><a href="#example">Example</a></h3>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">polars_core::prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">polars_io::prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::io::Cursor</span>;
+
+<span class="kw">let</span> <span class="ident">basic_json</span> <span class="op">=</span> <span class="string">r#&quot;{&quot;a&quot;:1, &quot;b&quot;:2.0, &quot;c&quot;:false, &quot;d&quot;:&quot;4&quot;}
+{&quot;a&quot;:-10, &quot;b&quot;:-3.5, &quot;c&quot;:true, &quot;d&quot;:&quot;4&quot;}
+{&quot;a&quot;:2, &quot;b&quot;:0.6, &quot;c&quot;:false, &quot;d&quot;:&quot;text&quot;}
+{&quot;a&quot;:1, &quot;b&quot;:2.0, &quot;c&quot;:false, &quot;d&quot;:&quot;4&quot;}
+{&quot;a&quot;:7, &quot;b&quot;:-3.5, &quot;c&quot;:true, &quot;d&quot;:&quot;4&quot;}
+{&quot;a&quot;:1, &quot;b&quot;:0.6, &quot;c&quot;:false, &quot;d&quot;:&quot;text&quot;}
+{&quot;a&quot;:1, &quot;b&quot;:2.0, &quot;c&quot;:false, &quot;d&quot;:&quot;4&quot;}
+{&quot;a&quot;:5, &quot;b&quot;:-3.5, &quot;c&quot;:true, &quot;d&quot;:&quot;4&quot;}
+{&quot;a&quot;:1, &quot;b&quot;:0.6, &quot;c&quot;:false, &quot;d&quot;:&quot;text&quot;}
+{&quot;a&quot;:1, &quot;b&quot;:2.0, &quot;c&quot;:false, &quot;d&quot;:&quot;4&quot;}
+{&quot;a&quot;:1, &quot;b&quot;:-3.5, &quot;c&quot;:true, &quot;d&quot;:&quot;4&quot;}
+{&quot;a&quot;:1, &quot;b&quot;:0.6, &quot;c&quot;:false, &quot;d&quot;:&quot;text&quot;}&quot;#</span>;
+<span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">Cursor::new</span>(<span class="ident">basic_json</span>);
+<span class="kw">let</span> <span class="ident">df</span> <span class="op">=</span> <span class="ident">JsonReader::new</span>(<span class="ident">file</span>)
+.<span class="ident">with_json_format</span>(<span class="ident">JsonFormat::JsonLines</span>)
+.<span class="ident">infer_schema_len</span>(<span class="prelude-val">Some</span>(<span class="number">3</span>))
+.<span class="ident">with_batch_size</span>(<span class="number">3</span>)
+.<span class="ident">finish</span>()
+.<span class="ident">unwrap</span>();
+
+<span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">df</span>);</code></pre></div>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Outputs:</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<div class="example-wrap"><pre class="language-text"><code>+-----+--------+-------+--------+
+| a   | b      | c     | d      |
+| --- | ---    | ---   | ---    |
+| i64 | f64    | bool  | str    |
++=====+========+=======+========+
+| 1   | 2      | false | &quot;4&quot;    |
++-----+--------+-------+--------+
+| -10 | -3.5e0 | true  | &quot;4&quot;    |
++-----+--------+-------+--------+
+| 2   | 0.6    | false | &quot;text&quot; |
++-----+--------+-------+--------+
+| 1   | 2      | false | &quot;4&quot;    |
++-----+--------+-------+--------+
+| 7   | -3.5e0 | true  | &quot;4&quot;    |
++-----+--------+-------+--------+
+| 1   | 0.6    | false | &quot;text&quot; |
++-----+--------+-------+--------+
+| 1   | 2      | false | &quot;4&quot;    |
++-----+--------+-------+--------+
+| 5   | -3.5e0 | true  | &quot;4&quot;    |
++-----+--------+-------+--------+
+| 1   | 0.6    | false | &quot;text&quot; |
++-----+--------+-------+--------+
+| 1   | 2      | false | &quot;4&quot;    |
++-----+--------+-------+--------+</code></pre></div></div></details><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="json/index.html" title="polars_io::json::json mod">json</a><span class="stab portability" title="Available on crate feature `io_json` only"><code>io_json</code></span></div><div class="item-right docblock-short"><p>Convert data between the Arrow memory format and JSON line-delimited records.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="ndjson/index.html" title="polars_io::json::ndjson mod">ndjson</a><span class="stab portability" title="Available on crate feature `io_json` only"><code>io_json</code></span></div><div class="item-right docblock-short"><p>APIs to read from and write to NDJSON</p>
+</div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.JsonReader.html" title="polars_io::json::JsonReader struct">JsonReader</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.JsonWriter.html" title="polars_io::json::JsonWriter struct">JsonWriter</a></div><div class="item-right docblock-short"></div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.JsonFormat.html" title="polars_io::json::JsonFormat enum">JsonFormat</a></div><div class="item-right docblock-short"></div></div></div><h2 id="types" class="small-section-header"><a href="#types">Type Definitions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="type" href="type.ArrowResult.html" title="polars_io::json::ArrowResult type">ArrowResult</a></div><div class="item-right docblock-short"><p>Typedef for a <a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="std::result::Result"><code>std::result::Result</code></a> of an <a href="../../arrow2/error/enum.Error.html" title="Error"><code>Error</code></a>.</p>
+</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="polars_io" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (c06728704 2022-05-19)" ></div>
+</body></html>

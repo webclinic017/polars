@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["uncased"] = [{"text":"impl !<a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html\" title=\"trait core::marker::Sized\">Sized</a> for <a class=\"struct\" href=\"uncased/struct.UncasedStr.html\" title=\"struct uncased::UncasedStr\">UncasedStr</a>","synthetic":true,"types":["uncased::borrowed::UncasedStr"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

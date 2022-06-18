@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["StringNameSpace","Specialized expressions for [`Series`] of [`DataType::Utf8`]."]]});

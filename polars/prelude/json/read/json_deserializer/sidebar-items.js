@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Error","List of possible errors"],["Number","Reference to JSON data."],["Value","Reference to JSON data."]],"fn":[["parse","Parses JSON-compliant bytes into [`Value`]"]],"type":[["Object","Typedef for the inside of an object."]]});

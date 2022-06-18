@@ -1,0 +1,5700 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>polars.Series.n_unique &#8212; Polars  documentation</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="polars.Series.null_count" href="polars.Series.null_count.html" />
+    <link rel="prev" title="polars.Series.n_chunks" href="polars.Series.n_chunks.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/polars_logo.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="../index.html">
+  API reference
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://pola-rs.github.io/polars-book/user-guide/index.html">User Guide<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://www.xomnia.com/">Powered by Xomnia<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/pola-rs/polars" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../io.html">
+   Input/output
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.read_csv.html">
+     polars.read_csv
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.scan_csv.html">
+     polars.scan_csv
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.write_csv.html">
+     polars.DataFrame.write_csv
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.read_ipc.html">
+     polars.read_ipc
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.scan_ipc.html">
+     polars.scan_ipc
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.read_ipc_schema.html">
+     polars.read_ipc_schema
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.write_ipc.html">
+     polars.DataFrame.write_ipc
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.read_parquet.html">
+     polars.read_parquet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.scan_parquet.html">
+     polars.scan_parquet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.read_parquet_schema.html">
+     polars.read_parquet_schema
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.write_parquet.html">
+     polars.DataFrame.write_parquet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.read_sql.html">
+     polars.read_sql
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.read_json.html">
+     polars.read_json
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.write_json.html">
+     polars.DataFrame.write_json
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.read_avro.html">
+     polars.read_avro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.write_avro.html">
+     polars.DataFrame.write_avro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.read_excel.html">
+     polars.read_excel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.scan_ds.html">
+     polars.scan_ds
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../functions.html">
+   Functions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.toggle_string_cache.html">
+     polars.toggle_string_cache
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.StringCache.html">
+     polars.StringCache
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.from_dict.html">
+     polars.from_dict
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.from_dicts.html">
+     polars.from_dicts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.from_records.html">
+     polars.from_records
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.from_arrow.html">
+     polars.from_arrow
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.from_pandas.html">
+     polars.from_pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.get_dummies.html">
+     polars.get_dummies
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.concat.html">
+     polars.concat
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.repeat.html">
+     polars.repeat
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.arg_where.html">
+     polars.arg_where
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.date_range.html">
+     polars.date_range
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.collect_all.html">
+     polars.collect_all
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.threadpool_size.html">
+     polars.threadpool_size
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../series.html">
+   Series
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active has-children">
+    <a class="reference internal" href="polars.Series.html">
+     polars.Series
+    </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.abs.html">
+       polars.Series.abs
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.alias.html">
+       polars.Series.alias
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.all.html">
+       polars.Series.all
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.any.html">
+       polars.Series.any
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.append.html">
+       polars.Series.append
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.apply.html">
+       polars.Series.apply
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.arccos.html">
+       polars.Series.arccos
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.arcsin.html">
+       polars.Series.arcsin
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.arctan.html">
+       polars.Series.arctan
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.arg_max.html">
+       polars.Series.arg_max
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.arg_min.html">
+       polars.Series.arg_min
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.arg_true.html">
+       polars.Series.arg_true
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.arg_unique.html">
+       polars.Series.arg_unique
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.argsort.html">
+       polars.Series.argsort
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.cast.html">
+       polars.Series.cast
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.ceil.html">
+       polars.Series.ceil
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.chunk_lengths.html">
+       polars.Series.chunk_lengths
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.clip.html">
+       polars.Series.clip
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.clone.html">
+       polars.Series.clone
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.cos.html">
+       polars.Series.cos
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.cummax.html">
+       polars.Series.cummax
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.cummin.html">
+       polars.Series.cummin
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.cumprod.html">
+       polars.Series.cumprod
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.cumsum.html">
+       polars.Series.cumsum
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.cumulative_eval.html">
+       polars.Series.cumulative_eval
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.describe.html">
+       polars.Series.describe
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.diff.html">
+       polars.Series.diff
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.dot.html">
+       polars.Series.dot
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.drop_nulls.html">
+       polars.Series.drop_nulls
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.entropy.html">
+       polars.Series.entropy
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.estimated_size.html">
+       polars.Series.estimated_size
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.ewm_mean.html">
+       polars.Series.ewm_mean
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.ewm_std.html">
+       polars.Series.ewm_std
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.ewm_var.html">
+       polars.Series.ewm_var
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.exp.html">
+       polars.Series.exp
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.explode.html">
+       polars.Series.explode
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.extend_constant.html">
+       polars.Series.extend_constant
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.fill_nan.html">
+       polars.Series.fill_nan
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.fill_null.html">
+       polars.Series.fill_null
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.filter.html">
+       polars.Series.filter
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.floor.html">
+       polars.Series.floor
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.has_validity.html">
+       polars.Series.has_validity
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.hash.html">
+       polars.Series.hash
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.head.html">
+       polars.Series.head
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.interpolate.html">
+       polars.Series.interpolate
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.is_boolean.html">
+       polars.Series.is_boolean
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.is_datelike.html">
+       polars.Series.is_datelike
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.is_duplicated.html">
+       polars.Series.is_duplicated
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.is_finite.html">
+       polars.Series.is_finite
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.is_first.html">
+       polars.Series.is_first
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.is_float.html">
+       polars.Series.is_float
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.is_in.html">
+       polars.Series.is_in
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.is_infinite.html">
+       polars.Series.is_infinite
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.is_nan.html">
+       polars.Series.is_nan
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.is_not_nan.html">
+       polars.Series.is_not_nan
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.is_not_null.html">
+       polars.Series.is_not_null
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.is_null.html">
+       polars.Series.is_null
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.is_numeric.html">
+       polars.Series.is_numeric
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.is_unique.html">
+       polars.Series.is_unique
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.is_utf8.html">
+       polars.Series.is_utf8
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.kurtosis.html">
+       polars.Series.kurtosis
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.len.html">
+       polars.Series.len
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.limit.html">
+       polars.Series.limit
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.log.html">
+       polars.Series.log
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.log10.html">
+       polars.Series.log10
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.max.html">
+       polars.Series.max
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.mean.html">
+       polars.Series.mean
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.median.html">
+       polars.Series.median
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.min.html">
+       polars.Series.min
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.mode.html">
+       polars.Series.mode
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.n_chunks.html">
+       polars.Series.n_chunks
+      </a>
+     </li>
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       polars.Series.n_unique
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.null_count.html">
+       polars.Series.null_count
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.pct_change.html">
+       polars.Series.pct_change
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.peak_max.html">
+       polars.Series.peak_max
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.peak_min.html">
+       polars.Series.peak_min
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.product.html">
+       polars.Series.product
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.quantile.html">
+       polars.Series.quantile
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.rank.html">
+       polars.Series.rank
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.rechunk.html">
+       polars.Series.rechunk
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.reinterpret.html">
+       polars.Series.reinterpret
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.rename.html">
+       polars.Series.rename
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.reshape.html">
+       polars.Series.reshape
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.rolling_apply.html">
+       polars.Series.rolling_apply
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.rolling_max.html">
+       polars.Series.rolling_max
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.rolling_mean.html">
+       polars.Series.rolling_mean
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.rolling_median.html">
+       polars.Series.rolling_median
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.rolling_min.html">
+       polars.Series.rolling_min
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.rolling_quantile.html">
+       polars.Series.rolling_quantile
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.rolling_skew.html">
+       polars.Series.rolling_skew
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.rolling_std.html">
+       polars.Series.rolling_std
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.rolling_sum.html">
+       polars.Series.rolling_sum
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.rolling_var.html">
+       polars.Series.rolling_var
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.round.html">
+       polars.Series.round
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.sample.html">
+       polars.Series.sample
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.series_equal.html">
+       polars.Series.series_equal
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.set.html">
+       polars.Series.set
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.set_at_idx.html">
+       polars.Series.set_at_idx
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.set_sorted.html">
+       polars.Series.set_sorted
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.shift.html">
+       polars.Series.shift
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.shift_and_fill.html">
+       polars.Series.shift_and_fill
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.shrink_to_fit.html">
+       polars.Series.shrink_to_fit
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.shuffle.html">
+       polars.Series.shuffle
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.sign.html">
+       polars.Series.sign
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.sin.html">
+       polars.Series.sin
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.skew.html">
+       polars.Series.skew
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.slice.html">
+       polars.Series.slice
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.sort.html">
+       polars.Series.sort
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.sqrt.html">
+       polars.Series.sqrt
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.std.html">
+       polars.Series.std
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.sum.html">
+       polars.Series.sum
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.tail.html">
+       polars.Series.tail
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.take.html">
+       polars.Series.take
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.take_every.html">
+       polars.Series.take_every
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.tan.html">
+       polars.Series.tan
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.to_arrow.html">
+       polars.Series.to_arrow
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.to_dummies.html">
+       polars.Series.to_dummies
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.to_frame.html">
+       polars.Series.to_frame
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.to_list.html">
+       polars.Series.to_list
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.to_numpy.html">
+       polars.Series.to_numpy
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.to_pandas.html">
+       polars.Series.to_pandas
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.to_physical.html">
+       polars.Series.to_physical
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.unique.html">
+       polars.Series.unique
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.unique_counts.html">
+       polars.Series.unique_counts
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.value_counts.html">
+       polars.Series.value_counts
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.var.html">
+       polars.Series.var
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.view.html">
+       polars.Series.view
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Series.zip_with.html">
+       polars.Series.zip_with
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.dtype.html">
+     polars.Series.dtype
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.inner_dtype.html">
+     polars.Series.inner_dtype
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.name.html">
+     polars.Series.name
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.shape.html">
+     polars.Series.shape
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.arr.html">
+     polars.Series.arr
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.dt.html">
+     polars.Series.dt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.str.html">
+     polars.Series.str
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.cat.html">
+     polars.Series.cat
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.time_unit.html">
+     polars.Series.time_unit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.to_frame.html">
+     polars.Series.to_frame
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.to_list.html">
+     polars.Series.to_list
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.to_numpy.html">
+     polars.Series.to_numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.to_arrow.html">
+     polars.Series.to_arrow
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.to_pandas.html">
+     polars.Series.to_pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.sum.html">
+     polars.Series.sum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.mean.html">
+     polars.Series.mean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.min.html">
+     polars.Series.min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.max.html">
+     polars.Series.max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.std.html">
+     polars.Series.std
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.var.html">
+     polars.Series.var
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.median.html">
+     polars.Series.median
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.quantile.html">
+     polars.Series.quantile
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.product.html">
+     polars.Series.product
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.mode.html">
+     polars.Series.mode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.arg_min.html">
+     polars.Series.arg_min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.arg_max.html">
+     polars.Series.arg_max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.describe.html">
+     polars.Series.describe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.estimated_size.html">
+     polars.Series.estimated_size
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.unique_counts.html">
+     polars.Series.unique_counts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.value_counts.html">
+     polars.Series.value_counts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.chunk_lengths.html">
+     polars.Series.chunk_lengths
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.n_chunks.html">
+     polars.Series.n_chunks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.null_count.html">
+     polars.Series.null_count
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.is_null.html">
+     polars.Series.is_null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.is_not_null.html">
+     polars.Series.is_not_null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.is_finite.html">
+     polars.Series.is_finite
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.is_infinite.html">
+     polars.Series.is_infinite
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.is_nan.html">
+     polars.Series.is_nan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.is_not_nan.html">
+     polars.Series.is_not_nan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.is_in.html">
+     polars.Series.is_in
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.is_unique.html">
+     polars.Series.is_unique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.is_first.html">
+     polars.Series.is_first
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.is_duplicated.html">
+     polars.Series.is_duplicated
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.is_numeric.html">
+     polars.Series.is_numeric
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.is_float.html">
+     polars.Series.is_float
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.is_boolean.html">
+     polars.Series.is_boolean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.is_utf8.html">
+     polars.Series.is_utf8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.is_datelike.html">
+     polars.Series.is_datelike
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.len.html">
+     polars.Series.len
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     polars.Series.n_unique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.has_validity.html">
+     polars.Series.has_validity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.any.html">
+     polars.Series.any
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.all.html">
+     polars.Series.all
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.cumsum.html">
+     polars.Series.cumsum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.cummin.html">
+     polars.Series.cummin
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.cummax.html">
+     polars.Series.cummax
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.cumprod.html">
+     polars.Series.cumprod
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.cumulative_eval.html">
+     polars.Series.cumulative_eval
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.arg_true.html">
+     polars.Series.arg_true
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.arg_unique.html">
+     polars.Series.arg_unique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.unique.html">
+     polars.Series.unique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.rolling_min.html">
+     polars.Series.rolling_min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.rolling_max.html">
+     polars.Series.rolling_max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.rolling_mean.html">
+     polars.Series.rolling_mean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.rolling_sum.html">
+     polars.Series.rolling_sum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.rolling_apply.html">
+     polars.Series.rolling_apply
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.rolling_std.html">
+     polars.Series.rolling_std
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.rolling_var.html">
+     polars.Series.rolling_var
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.rolling_median.html">
+     polars.Series.rolling_median
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.rolling_quantile.html">
+     polars.Series.rolling_quantile
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.rolling_skew.html">
+     polars.Series.rolling_skew
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.ewm_mean.html">
+     polars.Series.ewm_mean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.ewm_std.html">
+     polars.Series.ewm_std
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.ewm_var.html">
+     polars.Series.ewm_var
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.hash.html">
+     polars.Series.hash
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.peak_max.html">
+     polars.Series.peak_max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.peak_min.html">
+     polars.Series.peak_min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.dot.html">
+     polars.Series.dot
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.abs.html">
+     polars.Series.abs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.rank.html">
+     polars.Series.rank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.diff.html">
+     polars.Series.diff
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.pct_change.html">
+     polars.Series.pct_change
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.skew.html">
+     polars.Series.skew
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.kurtosis.html">
+     polars.Series.kurtosis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.entropy.html">
+     polars.Series.entropy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.sqrt.html">
+     polars.Series.sqrt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.sin.html">
+     polars.Series.sin
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.cos.html">
+     polars.Series.cos
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.tan.html">
+     polars.Series.tan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.arcsin.html">
+     polars.Series.arcsin
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.arccos.html">
+     polars.Series.arccos
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.arctan.html">
+     polars.Series.arctan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.log.html">
+     polars.Series.log
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.log10.html">
+     polars.Series.log10
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.exp.html">
+     polars.Series.exp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.sign.html">
+     polars.Series.sign
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.alias.html">
+     polars.Series.alias
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.rename.html">
+     polars.Series.rename
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.limit.html">
+     polars.Series.limit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.slice.html">
+     polars.Series.slice
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.append.html">
+     polars.Series.append
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.filter.html">
+     polars.Series.filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.head.html">
+     polars.Series.head
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.tail.html">
+     polars.Series.tail
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.take_every.html">
+     polars.Series.take_every
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.sort.html">
+     polars.Series.sort
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.argsort.html">
+     polars.Series.argsort
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.take.html">
+     polars.Series.take
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.shrink_to_fit.html">
+     polars.Series.shrink_to_fit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.explode.html">
+     polars.Series.explode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.sample.html">
+     polars.Series.sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.view.html">
+     polars.Series.view
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.set.html">
+     polars.Series.set
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.clone.html">
+     polars.Series.clone
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.shift.html">
+     polars.Series.shift
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.shift_and_fill.html">
+     polars.Series.shift_and_fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.drop_nulls.html">
+     polars.Series.drop_nulls
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.drop_nans.html">
+     polars.Series.drop_nans
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.rechunk.html">
+     polars.Series.rechunk
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.cast.html">
+     polars.Series.cast
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.round.html">
+     polars.Series.round
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.floor.html">
+     polars.Series.floor
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.ceil.html">
+     polars.Series.ceil
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.set_at_idx.html">
+     polars.Series.set_at_idx
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.fill_null.html">
+     polars.Series.fill_null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.fill_nan.html">
+     polars.Series.fill_nan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.zip_with.html">
+     polars.Series.zip_with
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.interpolate.html">
+     polars.Series.interpolate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.clip.html">
+     polars.Series.clip
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.reshape.html">
+     polars.Series.reshape
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.to_dummies.html">
+     polars.Series.to_dummies
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.shuffle.html">
+     polars.Series.shuffle
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.extend_constant.html">
+     polars.Series.extend_constant
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.series_equal.html">
+     polars.Series.series_equal
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.apply.html">
+     polars.Series.apply
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.dt.html">
+     polars.Series.dt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.str.html">
+     polars.Series.str
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.reinterpret.html">
+     polars.Series.reinterpret
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.to_physical.html">
+     polars.Series.to_physical
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Series.set_sorted.html">
+     polars.Series.set_sorted
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.strftime.html">
+     polars.internals.series.DateTimeNameSpace.strftime
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.year.html">
+     polars.internals.series.DateTimeNameSpace.year
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.month.html">
+     polars.internals.series.DateTimeNameSpace.month
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.week.html">
+     polars.internals.series.DateTimeNameSpace.week
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.weekday.html">
+     polars.internals.series.DateTimeNameSpace.weekday
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.day.html">
+     polars.internals.series.DateTimeNameSpace.day
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.ordinal_day.html">
+     polars.internals.series.DateTimeNameSpace.ordinal_day
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.hour.html">
+     polars.internals.series.DateTimeNameSpace.hour
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.minute.html">
+     polars.internals.series.DateTimeNameSpace.minute
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.second.html">
+     polars.internals.series.DateTimeNameSpace.second
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.nanosecond.html">
+     polars.internals.series.DateTimeNameSpace.nanosecond
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.timestamp.html">
+     polars.internals.series.DateTimeNameSpace.timestamp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.to_python_datetime.html">
+     polars.internals.series.DateTimeNameSpace.to_python_datetime
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.min.html">
+     polars.internals.series.DateTimeNameSpace.min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.max.html">
+     polars.internals.series.DateTimeNameSpace.max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.median.html">
+     polars.internals.series.DateTimeNameSpace.median
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.mean.html">
+     polars.internals.series.DateTimeNameSpace.mean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.truncate.html">
+     polars.internals.series.DateTimeNameSpace.truncate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.epoch.html">
+     polars.internals.series.DateTimeNameSpace.epoch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.epoch_days.html">
+     polars.internals.series.DateTimeNameSpace.epoch_days
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.epoch_milliseconds.html">
+     polars.internals.series.DateTimeNameSpace.epoch_milliseconds
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.epoch_seconds.html">
+     polars.internals.series.DateTimeNameSpace.epoch_seconds
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.and_time_unit.html">
+     polars.internals.series.DateTimeNameSpace.and_time_unit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.and_time_zone.html">
+     polars.internals.series.DateTimeNameSpace.and_time_zone
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.with_time_unit.html">
+     polars.internals.series.DateTimeNameSpace.with_time_unit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.cast_time_unit.html">
+     polars.internals.series.DateTimeNameSpace.cast_time_unit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.days.html">
+     polars.internals.series.DateTimeNameSpace.days
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.hours.html">
+     polars.internals.series.DateTimeNameSpace.hours
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.minutes.html">
+     polars.internals.series.DateTimeNameSpace.minutes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.seconds.html">
+     polars.internals.series.DateTimeNameSpace.seconds
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.milliseconds.html">
+     polars.internals.series.DateTimeNameSpace.milliseconds
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.DateTimeNameSpace.nanoseconds.html">
+     polars.internals.series.DateTimeNameSpace.nanoseconds
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.strptime.html">
+     polars.internals.series.StringNameSpace.strptime
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.lengths.html">
+     polars.internals.series.StringNameSpace.lengths
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.concat.html">
+     polars.internals.series.StringNameSpace.concat
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.contains.html">
+     polars.internals.series.StringNameSpace.contains
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.json_path_match.html">
+     polars.internals.series.StringNameSpace.json_path_match
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.extract.html">
+     polars.internals.series.StringNameSpace.extract
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.extract_all.html">
+     polars.internals.series.StringNameSpace.extract_all
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.count_match.html">
+     polars.internals.series.StringNameSpace.count_match
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.split.html">
+     polars.internals.series.StringNameSpace.split
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.split_exact.html">
+     polars.internals.series.StringNameSpace.split_exact
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.replace.html">
+     polars.internals.series.StringNameSpace.replace
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.replace_all.html">
+     polars.internals.series.StringNameSpace.replace_all
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.to_lowercase.html">
+     polars.internals.series.StringNameSpace.to_lowercase
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.to_uppercase.html">
+     polars.internals.series.StringNameSpace.to_uppercase
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.strip.html">
+     polars.internals.series.StringNameSpace.strip
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.rstrip.html">
+     polars.internals.series.StringNameSpace.rstrip
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.lstrip.html">
+     polars.internals.series.StringNameSpace.lstrip
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.zfill.html">
+     polars.internals.series.StringNameSpace.zfill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.ljust.html">
+     polars.internals.series.StringNameSpace.ljust
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.rjust.html">
+     polars.internals.series.StringNameSpace.rjust
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.slice.html">
+     polars.internals.series.StringNameSpace.slice
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.encode.html">
+     polars.internals.series.StringNameSpace.encode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StringNameSpace.decode.html">
+     polars.internals.series.StringNameSpace.decode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.concat.html">
+     polars.internals.series.ListNameSpace.concat
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.lengths.html">
+     polars.internals.series.ListNameSpace.lengths
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.sum.html">
+     polars.internals.series.ListNameSpace.sum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.min.html">
+     polars.internals.series.ListNameSpace.min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.max.html">
+     polars.internals.series.ListNameSpace.max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.mean.html">
+     polars.internals.series.ListNameSpace.mean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.sort.html">
+     polars.internals.series.ListNameSpace.sort
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.reverse.html">
+     polars.internals.series.ListNameSpace.reverse
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.unique.html">
+     polars.internals.series.ListNameSpace.unique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.get.html">
+     polars.internals.series.ListNameSpace.get
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.first.html">
+     polars.internals.series.ListNameSpace.first
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.last.html">
+     polars.internals.series.ListNameSpace.last
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.contains.html">
+     polars.internals.series.ListNameSpace.contains
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.join.html">
+     polars.internals.series.ListNameSpace.join
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.arg_min.html">
+     polars.internals.series.ListNameSpace.arg_min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.arg_max.html">
+     polars.internals.series.ListNameSpace.arg_max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.diff.html">
+     polars.internals.series.ListNameSpace.diff
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.shift.html">
+     polars.internals.series.ListNameSpace.shift
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.slice.html">
+     polars.internals.series.ListNameSpace.slice
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.head.html">
+     polars.internals.series.ListNameSpace.head
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.tail.html">
+     polars.internals.series.ListNameSpace.tail
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.ListNameSpace.eval.html">
+     polars.internals.series.ListNameSpace.eval
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.CatNameSpace.set_ordering.html">
+     polars.internals.series.CatNameSpace.set_ordering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StructNameSpace.to_frame.html">
+     polars.internals.series.StructNameSpace.to_frame
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StructNameSpace.field.html">
+     polars.internals.series.StructNameSpace.field
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StructNameSpace.fields.html">
+     polars.internals.series.StructNameSpace.fields
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.series.StructNameSpace.rename_fields.html">
+     polars.internals.series.StructNameSpace.rename_fields
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../dataframe.html">
+   DataFrame
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="polars.DataFrame.html">
+     polars.DataFrame
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+    <label for="toctree-checkbox-6">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.apply.html">
+       polars.DataFrame.apply
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.clone.html">
+       polars.DataFrame.clone
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.describe.html">
+       polars.DataFrame.describe
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.distinct.html">
+       polars.DataFrame.distinct
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.drop.html">
+       polars.DataFrame.drop
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.drop_in_place.html">
+       polars.DataFrame.drop_in_place
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.drop_nulls.html">
+       polars.DataFrame.drop_nulls
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.estimated_size.html">
+       polars.DataFrame.estimated_size
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.explode.html">
+       polars.DataFrame.explode
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.extend.html">
+       polars.DataFrame.extend
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.fill_nan.html">
+       polars.DataFrame.fill_nan
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.fill_null.html">
+       polars.DataFrame.fill_null
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.filter.html">
+       polars.DataFrame.filter
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.find_idx_by_name.html">
+       polars.DataFrame.find_idx_by_name
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.fold.html">
+       polars.DataFrame.fold
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.frame_equal.html">
+       polars.DataFrame.frame_equal
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.get_column.html">
+       polars.DataFrame.get_column
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.get_columns.html">
+       polars.DataFrame.get_columns
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.groupby.html">
+       polars.DataFrame.groupby
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.groupby_dynamic.html">
+       polars.DataFrame.groupby_dynamic
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.groupby_rolling.html">
+       polars.DataFrame.groupby_rolling
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.hash_rows.html">
+       polars.DataFrame.hash_rows
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.head.html">
+       polars.DataFrame.head
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.hstack.html">
+       polars.DataFrame.hstack
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.insert_at_idx.html">
+       polars.DataFrame.insert_at_idx
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.interpolate.html">
+       polars.DataFrame.interpolate
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.is_duplicated.html">
+       polars.DataFrame.is_duplicated
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.is_empty.html">
+       polars.DataFrame.is_empty
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.is_unique.html">
+       polars.DataFrame.is_unique
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.join.html">
+       polars.DataFrame.join
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.join_asof.html">
+       polars.DataFrame.join_asof
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.lazy.html">
+       polars.DataFrame.lazy
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.limit.html">
+       polars.DataFrame.limit
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.max.html">
+       polars.DataFrame.max
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.mean.html">
+       polars.DataFrame.mean
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.median.html">
+       polars.DataFrame.median
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.melt.html">
+       polars.DataFrame.melt
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.min.html">
+       polars.DataFrame.min
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.n_chunks.html">
+       polars.DataFrame.n_chunks
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.null_count.html">
+       polars.DataFrame.null_count
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.partition_by.html">
+       polars.DataFrame.partition_by
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.pipe.html">
+       polars.DataFrame.pipe
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.pivot.html">
+       polars.DataFrame.pivot
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.product.html">
+       polars.DataFrame.product
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.quantile.html">
+       polars.DataFrame.quantile
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.rechunk.html">
+       polars.DataFrame.rechunk
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.rename.html">
+       polars.DataFrame.rename
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.replace.html">
+       polars.DataFrame.replace
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.replace_at_idx.html">
+       polars.DataFrame.replace_at_idx
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.row.html">
+       polars.DataFrame.row
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.rows.html">
+       polars.DataFrame.rows
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.sample.html">
+       polars.DataFrame.sample
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.select.html">
+       polars.DataFrame.select
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.select_at_idx.html">
+       polars.DataFrame.select_at_idx
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.shift.html">
+       polars.DataFrame.shift
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.shift_and_fill.html">
+       polars.DataFrame.shift_and_fill
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.shrink_to_fit.html">
+       polars.DataFrame.shrink_to_fit
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.slice.html">
+       polars.DataFrame.slice
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.sort.html">
+       polars.DataFrame.sort
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.std.html">
+       polars.DataFrame.std
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.sum.html">
+       polars.DataFrame.sum
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.tail.html">
+       polars.DataFrame.tail
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.to_arrow.html">
+       polars.DataFrame.to_arrow
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.to_avro.html">
+       polars.DataFrame.to_avro
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.to_csv.html">
+       polars.DataFrame.to_csv
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.to_dict.html">
+       polars.DataFrame.to_dict
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.to_dicts.html">
+       polars.DataFrame.to_dicts
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.to_dummies.html">
+       polars.DataFrame.to_dummies
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.to_ipc.html">
+       polars.DataFrame.to_ipc
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.to_json.html">
+       polars.DataFrame.to_json
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.to_numpy.html">
+       polars.DataFrame.to_numpy
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.to_pandas.html">
+       polars.DataFrame.to_pandas
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.to_parquet.html">
+       polars.DataFrame.to_parquet
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.to_series.html">
+       polars.DataFrame.to_series
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.to_struct.html">
+       polars.DataFrame.to_struct
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.transpose.html">
+       polars.DataFrame.transpose
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.unique.html">
+       polars.DataFrame.unique
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.unnest.html">
+       polars.DataFrame.unnest
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.upsample.html">
+       polars.DataFrame.upsample
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.var.html">
+       polars.DataFrame.var
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.vstack.html">
+       polars.DataFrame.vstack
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.with_column.html">
+       polars.DataFrame.with_column
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.with_columns.html">
+       polars.DataFrame.with_columns
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.with_row_count.html">
+       polars.DataFrame.with_row_count
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.write_avro.html">
+       polars.DataFrame.write_avro
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.write_csv.html">
+       polars.DataFrame.write_csv
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.write_ipc.html">
+       polars.DataFrame.write_ipc
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.write_json.html">
+       polars.DataFrame.write_json
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.DataFrame.write_parquet.html">
+       polars.DataFrame.write_parquet
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.shape.html">
+     polars.DataFrame.shape
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.height.html">
+     polars.DataFrame.height
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.width.html">
+     polars.DataFrame.width
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.columns.html">
+     polars.DataFrame.columns
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.dtypes.html">
+     polars.DataFrame.dtypes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.schema.html">
+     polars.DataFrame.schema
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.to_arrow.html">
+     polars.DataFrame.to_arrow
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.to_avro.html">
+     polars.DataFrame.to_avro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.to_json.html">
+     polars.DataFrame.to_json
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.to_pandas.html">
+     polars.DataFrame.to_pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.to_csv.html">
+     polars.DataFrame.to_csv
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.to_ipc.html">
+     polars.DataFrame.to_ipc
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.to_parquet.html">
+     polars.DataFrame.to_parquet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.to_numpy.html">
+     polars.DataFrame.to_numpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.to_dict.html">
+     polars.DataFrame.to_dict
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.to_dicts.html">
+     polars.DataFrame.to_dicts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.to_struct.html">
+     polars.DataFrame.to_struct
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.max.html">
+     polars.DataFrame.max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.min.html">
+     polars.DataFrame.min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.sum.html">
+     polars.DataFrame.sum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.mean.html">
+     polars.DataFrame.mean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.std.html">
+     polars.DataFrame.std
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.var.html">
+     polars.DataFrame.var
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.median.html">
+     polars.DataFrame.median
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.quantile.html">
+     polars.DataFrame.quantile
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.product.html">
+     polars.DataFrame.product
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.describe.html">
+     polars.DataFrame.describe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.estimated_size.html">
+     polars.DataFrame.estimated_size
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.is_duplicated.html">
+     polars.DataFrame.is_duplicated
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.is_unique.html">
+     polars.DataFrame.is_unique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.n_chunks.html">
+     polars.DataFrame.n_chunks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.null_count.html">
+     polars.DataFrame.null_count
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.is_empty.html">
+     polars.DataFrame.is_empty
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.hash_rows.html">
+     polars.DataFrame.hash_rows
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.fold.html">
+     polars.DataFrame.fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.rename.html">
+     polars.DataFrame.rename
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.with_row_count.html">
+     polars.DataFrame.with_row_count
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.insert_at_idx.html">
+     polars.DataFrame.insert_at_idx
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.filter.html">
+     polars.DataFrame.filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.find_idx_by_name.html">
+     polars.DataFrame.find_idx_by_name
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.select_at_idx.html">
+     polars.DataFrame.select_at_idx
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.replace_at_idx.html">
+     polars.DataFrame.replace_at_idx
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.sort.html">
+     polars.DataFrame.sort
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.replace.html">
+     polars.DataFrame.replace
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.slice.html">
+     polars.DataFrame.slice
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.limit.html">
+     polars.DataFrame.limit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.head.html">
+     polars.DataFrame.head
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.tail.html">
+     polars.DataFrame.tail
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.drop_nulls.html">
+     polars.DataFrame.drop_nulls
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.drop.html">
+     polars.DataFrame.drop
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.drop_in_place.html">
+     polars.DataFrame.drop_in_place
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.to_series.html">
+     polars.DataFrame.to_series
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.clone.html">
+     polars.DataFrame.clone
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.get_columns.html">
+     polars.DataFrame.get_columns
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.get_column.html">
+     polars.DataFrame.get_column
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.fill_null.html">
+     polars.DataFrame.fill_null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.fill_nan.html">
+     polars.DataFrame.fill_nan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.explode.html">
+     polars.DataFrame.explode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.pivot.html">
+     polars.DataFrame.pivot
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.melt.html">
+     polars.DataFrame.melt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.shift.html">
+     polars.DataFrame.shift
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.shift_and_fill.html">
+     polars.DataFrame.shift_and_fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.with_column.html">
+     polars.DataFrame.with_column
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.hstack.html">
+     polars.DataFrame.hstack
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.vstack.html">
+     polars.DataFrame.vstack
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.extend.html">
+     polars.DataFrame.extend
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.groupby.html">
+     polars.DataFrame.groupby
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.groupby_dynamic.html">
+     polars.DataFrame.groupby_dynamic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.groupby_rolling.html">
+     polars.DataFrame.groupby_rolling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.select.html">
+     polars.DataFrame.select
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.with_columns.html">
+     polars.DataFrame.with_columns
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.sample.html">
+     polars.DataFrame.sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.row.html">
+     polars.DataFrame.row
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.rows.html">
+     polars.DataFrame.rows
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.to_dummies.html">
+     polars.DataFrame.to_dummies
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.distinct.html">
+     polars.DataFrame.distinct
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.unique.html">
+     polars.DataFrame.unique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.shrink_to_fit.html">
+     polars.DataFrame.shrink_to_fit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.rechunk.html">
+     polars.DataFrame.rechunk
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.pipe.html">
+     polars.DataFrame.pipe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.join.html">
+     polars.DataFrame.join
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.join_asof.html">
+     polars.DataFrame.join_asof
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.interpolate.html">
+     polars.DataFrame.interpolate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.transpose.html">
+     polars.DataFrame.transpose
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.partition_by.html">
+     polars.DataFrame.partition_by
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.upsample.html">
+     polars.DataFrame.upsample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.unnest.html">
+     polars.DataFrame.unnest
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.apply.html">
+     polars.DataFrame.apply
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.frame_equal.html">
+     polars.DataFrame.frame_equal
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.DataFrame.lazy.html">
+     polars.DataFrame.lazy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.agg.html">
+     polars.internals.frame.GroupBy.agg
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.apply.html">
+     polars.internals.frame.GroupBy.apply
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.head.html">
+     polars.internals.frame.GroupBy.head
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.tail.html">
+     polars.internals.frame.GroupBy.tail
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.get_group.html">
+     polars.internals.frame.GroupBy.get_group
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.groups.html">
+     polars.internals.frame.GroupBy.groups
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.pivot.html">
+     polars.internals.frame.GroupBy.pivot
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.first.html">
+     polars.internals.frame.GroupBy.first
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.last.html">
+     polars.internals.frame.GroupBy.last
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.sum.html">
+     polars.internals.frame.GroupBy.sum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.min.html">
+     polars.internals.frame.GroupBy.min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.max.html">
+     polars.internals.frame.GroupBy.max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.count.html">
+     polars.internals.frame.GroupBy.count
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.mean.html">
+     polars.internals.frame.GroupBy.mean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.n_unique.html">
+     polars.internals.frame.GroupBy.n_unique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.quantile.html">
+     polars.internals.frame.GroupBy.quantile
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.median.html">
+     polars.internals.frame.GroupBy.median
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.GroupBy.agg_list.html">
+     polars.internals.frame.GroupBy.agg_list
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.PivotOps.first.html">
+     polars.internals.frame.PivotOps.first
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.PivotOps.last.html">
+     polars.internals.frame.PivotOps.last
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.PivotOps.sum.html">
+     polars.internals.frame.PivotOps.sum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.PivotOps.min.html">
+     polars.internals.frame.PivotOps.min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.PivotOps.max.html">
+     polars.internals.frame.PivotOps.max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.PivotOps.mean.html">
+     polars.internals.frame.PivotOps.mean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.PivotOps.count.html">
+     polars.internals.frame.PivotOps.count
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.frame.PivotOps.median.html">
+     polars.internals.frame.PivotOps.median
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../expression.html">
+   Expressions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.select.html">
+     polars.select
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.col.html">
+     polars.col
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.element.html">
+     polars.element
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.count.html">
+     polars.count
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.list.html">
+     polars.list
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.std.html">
+     polars.std
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.var.html">
+     polars.var
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.max.html">
+     polars.max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.min.html">
+     polars.min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.sum.html">
+     polars.sum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.mean.html">
+     polars.mean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.avg.html">
+     polars.avg
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.median.html">
+     polars.median
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.n_unique.html">
+     polars.n_unique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.first.html">
+     polars.first
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.last.html">
+     polars.last
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.head.html">
+     polars.head
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.tail.html">
+     polars.tail
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.lit.html">
+     polars.lit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.pearson_corr.html">
+     polars.pearson_corr
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.spearman_rank_corr.html">
+     polars.spearman_rank_corr
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.cov.html">
+     polars.cov
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.map.html">
+     polars.map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.apply.html">
+     polars.apply
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.fold.html">
+     polars.fold
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.any.html">
+     polars.any
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.all.html">
+     polars.all
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.groups.html">
+     polars.groups
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.quantile.html">
+     polars.quantile
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.arange.html">
+     polars.arange
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.repeat.html">
+     polars.repeat
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.argsort_by.html">
+     polars.argsort_by
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.concat_str.html">
+     polars.concat_str
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.concat_list.html">
+     polars.concat_list
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.format.html">
+     polars.format
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.when.html">
+     polars.when
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.exclude.html">
+     polars.exclude
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datetime.html">
+     polars.datetime
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.duration.html">
+     polars.duration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.date.html">
+     polars.date
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.struct.html">
+     polars.struct
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="polars.Expr.html">
+     polars.Expr
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+    <label for="toctree-checkbox-8">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.abs.html">
+       polars.Expr.abs
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.agg_groups.html">
+       polars.Expr.agg_groups
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.alias.html">
+       polars.Expr.alias
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.all.html">
+       polars.Expr.all
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.any.html">
+       polars.Expr.any
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.append.html">
+       polars.Expr.append
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.apply.html">
+       polars.Expr.apply
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.arccos.html">
+       polars.Expr.arccos
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.arcsin.html">
+       polars.Expr.arcsin
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.arctan.html">
+       polars.Expr.arctan
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.arg_max.html">
+       polars.Expr.arg_max
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.arg_min.html">
+       polars.Expr.arg_min
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.arg_sort.html">
+       polars.Expr.arg_sort
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.arg_unique.html">
+       polars.Expr.arg_unique
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.argsort.html">
+       polars.Expr.argsort
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.backward_fill.html">
+       polars.Expr.backward_fill
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.cast.html">
+       polars.Expr.cast
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.ceil.html">
+       polars.Expr.ceil
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.clip.html">
+       polars.Expr.clip
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.cos.html">
+       polars.Expr.cos
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.count.html">
+       polars.Expr.count
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.cumcount.html">
+       polars.Expr.cumcount
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.cummax.html">
+       polars.Expr.cummax
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.cummin.html">
+       polars.Expr.cummin
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.cumprod.html">
+       polars.Expr.cumprod
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.cumsum.html">
+       polars.Expr.cumsum
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.cumulative_eval.html">
+       polars.Expr.cumulative_eval
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.diff.html">
+       polars.Expr.diff
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.dot.html">
+       polars.Expr.dot
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.drop_nans.html">
+       polars.Expr.drop_nans
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.drop_nulls.html">
+       polars.Expr.drop_nulls
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.entropy.html">
+       polars.Expr.entropy
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.ewm_mean.html">
+       polars.Expr.ewm_mean
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.ewm_std.html">
+       polars.Expr.ewm_std
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.ewm_var.html">
+       polars.Expr.ewm_var
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.exclude.html">
+       polars.Expr.exclude
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.exp.html">
+       polars.Expr.exp
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.explode.html">
+       polars.Expr.explode
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.extend_constant.html">
+       polars.Expr.extend_constant
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.fill_nan.html">
+       polars.Expr.fill_nan
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.fill_null.html">
+       polars.Expr.fill_null
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.filter.html">
+       polars.Expr.filter
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.first.html">
+       polars.Expr.first
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.flatten.html">
+       polars.Expr.flatten
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.floor.html">
+       polars.Expr.floor
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.forward_fill.html">
+       polars.Expr.forward_fill
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.hash.html">
+       polars.Expr.hash
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.head.html">
+       polars.Expr.head
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.inspect.html">
+       polars.Expr.inspect
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.interpolate.html">
+       polars.Expr.interpolate
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.is_between.html">
+       polars.Expr.is_between
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.is_duplicated.html">
+       polars.Expr.is_duplicated
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.is_finite.html">
+       polars.Expr.is_finite
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.is_first.html">
+       polars.Expr.is_first
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.is_in.html">
+       polars.Expr.is_in
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.is_infinite.html">
+       polars.Expr.is_infinite
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.is_nan.html">
+       polars.Expr.is_nan
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.is_not.html">
+       polars.Expr.is_not
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.is_not_nan.html">
+       polars.Expr.is_not_nan
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.is_not_null.html">
+       polars.Expr.is_not_null
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.is_null.html">
+       polars.Expr.is_null
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.is_unique.html">
+       polars.Expr.is_unique
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.keep_name.html">
+       polars.Expr.keep_name
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.kurtosis.html">
+       polars.Expr.kurtosis
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.last.html">
+       polars.Expr.last
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.len.html">
+       polars.Expr.len
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.list.html">
+       polars.Expr.list
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.log.html">
+       polars.Expr.log
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.log10.html">
+       polars.Expr.log10
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.lower_bound.html">
+       polars.Expr.lower_bound
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.map.html">
+       polars.Expr.map
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.map_alias.html">
+       polars.Expr.map_alias
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.max.html">
+       polars.Expr.max
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.mean.html">
+       polars.Expr.mean
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.median.html">
+       polars.Expr.median
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.min.html">
+       polars.Expr.min
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.mode.html">
+       polars.Expr.mode
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.n_unique.html">
+       polars.Expr.n_unique
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.null_count.html">
+       polars.Expr.null_count
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.over.html">
+       polars.Expr.over
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.pct_change.html">
+       polars.Expr.pct_change
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.pow.html">
+       polars.Expr.pow
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.prefix.html">
+       polars.Expr.prefix
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.product.html">
+       polars.Expr.product
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.quantile.html">
+       polars.Expr.quantile
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.rank.html">
+       polars.Expr.rank
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.rechunk.html">
+       polars.Expr.rechunk
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.reinterpret.html">
+       polars.Expr.reinterpret
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.repeat_by.html">
+       polars.Expr.repeat_by
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.reshape.html">
+       polars.Expr.reshape
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.reverse.html">
+       polars.Expr.reverse
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.rolling_apply.html">
+       polars.Expr.rolling_apply
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.rolling_max.html">
+       polars.Expr.rolling_max
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.rolling_mean.html">
+       polars.Expr.rolling_mean
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.rolling_median.html">
+       polars.Expr.rolling_median
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.rolling_min.html">
+       polars.Expr.rolling_min
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.rolling_quantile.html">
+       polars.Expr.rolling_quantile
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.rolling_skew.html">
+       polars.Expr.rolling_skew
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.rolling_std.html">
+       polars.Expr.rolling_std
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.rolling_sum.html">
+       polars.Expr.rolling_sum
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.rolling_var.html">
+       polars.Expr.rolling_var
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.round.html">
+       polars.Expr.round
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.sample.html">
+       polars.Expr.sample
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.set_sorted.html">
+       polars.Expr.set_sorted
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.shift.html">
+       polars.Expr.shift
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.shift_and_fill.html">
+       polars.Expr.shift_and_fill
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.shuffle.html">
+       polars.Expr.shuffle
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.sign.html">
+       polars.Expr.sign
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.sin.html">
+       polars.Expr.sin
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.skew.html">
+       polars.Expr.skew
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.slice.html">
+       polars.Expr.slice
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.sort.html">
+       polars.Expr.sort
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.sort_by.html">
+       polars.Expr.sort_by
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.sqrt.html">
+       polars.Expr.sqrt
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.std.html">
+       polars.Expr.std
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.suffix.html">
+       polars.Expr.suffix
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.sum.html">
+       polars.Expr.sum
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.tail.html">
+       polars.Expr.tail
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.take.html">
+       polars.Expr.take
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.take_every.html">
+       polars.Expr.take_every
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.tan.html">
+       polars.Expr.tan
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.to_physical.html">
+       polars.Expr.to_physical
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.unique.html">
+       polars.Expr.unique
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.unique_counts.html">
+       polars.Expr.unique_counts
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.upper_bound.html">
+       polars.Expr.upper_bound
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.value_counts.html">
+       polars.Expr.value_counts
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.var.html">
+       polars.Expr.var
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="polars.Expr.where.html">
+       polars.Expr.where
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.arr.html">
+     polars.Expr.arr
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.dt.html">
+     polars.Expr.dt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.str.html">
+     polars.Expr.str
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.cat.html">
+     polars.Expr.cat
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.std.html">
+     polars.Expr.std
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.var.html">
+     polars.Expr.var
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.max.html">
+     polars.Expr.max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.min.html">
+     polars.Expr.min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.sum.html">
+     polars.Expr.sum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.mean.html">
+     polars.Expr.mean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.mean.html">
+     polars.Expr.mean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.median.html">
+     polars.Expr.median
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.first.html">
+     polars.Expr.first
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.last.html">
+     polars.Expr.last
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.product.html">
+     polars.Expr.product
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.list.html">
+     polars.Expr.list
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.agg_groups.html">
+     polars.Expr.agg_groups
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.count.html">
+     polars.Expr.count
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.len.html">
+     polars.Expr.len
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.quantile.html">
+     polars.Expr.quantile
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.arg_min.html">
+     polars.Expr.arg_min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.arg_max.html">
+     polars.Expr.arg_max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.is_not.html">
+     polars.Expr.is_not
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.is_null.html">
+     polars.Expr.is_null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.is_not_null.html">
+     polars.Expr.is_not_null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.is_finite.html">
+     polars.Expr.is_finite
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.is_infinite.html">
+     polars.Expr.is_infinite
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.is_nan.html">
+     polars.Expr.is_nan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.is_not_nan.html">
+     polars.Expr.is_not_nan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.is_unique.html">
+     polars.Expr.is_unique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.is_first.html">
+     polars.Expr.is_first
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.is_duplicated.html">
+     polars.Expr.is_duplicated
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.is_between.html">
+     polars.Expr.is_between
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.is_in.html">
+     polars.Expr.is_in
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.any.html">
+     polars.Expr.any
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.all.html">
+     polars.Expr.all
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.cumsum.html">
+     polars.Expr.cumsum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.cummin.html">
+     polars.Expr.cummin
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.cummax.html">
+     polars.Expr.cummax
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.cumprod.html">
+     polars.Expr.cumprod
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.cumcount.html">
+     polars.Expr.cumcount
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.cumulative_eval.html">
+     polars.Expr.cumulative_eval
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.dot.html">
+     polars.Expr.dot
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.mode.html">
+     polars.Expr.mode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.n_unique.html">
+     polars.Expr.n_unique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.arg_unique.html">
+     polars.Expr.arg_unique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.unique.html">
+     polars.Expr.unique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.pow.html">
+     polars.Expr.pow
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.rolling_min.html">
+     polars.Expr.rolling_min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.rolling_max.html">
+     polars.Expr.rolling_max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.rolling_mean.html">
+     polars.Expr.rolling_mean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.rolling_sum.html">
+     polars.Expr.rolling_sum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.rolling_apply.html">
+     polars.Expr.rolling_apply
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.rolling_std.html">
+     polars.Expr.rolling_std
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.rolling_var.html">
+     polars.Expr.rolling_var
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.rolling_median.html">
+     polars.Expr.rolling_median
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.rolling_quantile.html">
+     polars.Expr.rolling_quantile
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.rolling_skew.html">
+     polars.Expr.rolling_skew
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.ewm_mean.html">
+     polars.Expr.ewm_mean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.ewm_std.html">
+     polars.Expr.ewm_std
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.ewm_var.html">
+     polars.Expr.ewm_var
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.hash.html">
+     polars.Expr.hash
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.abs.html">
+     polars.Expr.abs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.rank.html">
+     polars.Expr.rank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.diff.html">
+     polars.Expr.diff
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.pct_change.html">
+     polars.Expr.pct_change
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.skew.html">
+     polars.Expr.skew
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.kurtosis.html">
+     polars.Expr.kurtosis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.entropy.html">
+     polars.Expr.entropy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.sqrt.html">
+     polars.Expr.sqrt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.sin.html">
+     polars.Expr.sin
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.cos.html">
+     polars.Expr.cos
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.tan.html">
+     polars.Expr.tan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.arcsin.html">
+     polars.Expr.arcsin
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.arccos.html">
+     polars.Expr.arccos
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.arctan.html">
+     polars.Expr.arctan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.log.html">
+     polars.Expr.log
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.log10.html">
+     polars.Expr.log10
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.exp.html">
+     polars.Expr.exp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.sign.html">
+     polars.Expr.sign
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.unique_counts.html">
+     polars.Expr.unique_counts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.value_counts.html">
+     polars.Expr.value_counts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.null_count.html">
+     polars.Expr.null_count
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.inspect.html">
+     polars.Expr.inspect
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.slice.html">
+     polars.Expr.slice
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.append.html">
+     polars.Expr.append
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.explode.html">
+     polars.Expr.explode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.flatten.html">
+     polars.Expr.flatten
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.take_every.html">
+     polars.Expr.take_every
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.repeat_by.html">
+     polars.Expr.repeat_by
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.round.html">
+     polars.Expr.round
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.floor.html">
+     polars.Expr.floor
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.ceil.html">
+     polars.Expr.ceil
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.cast.html">
+     polars.Expr.cast
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.sort.html">
+     polars.Expr.sort
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.arg_sort.html">
+     polars.Expr.arg_sort
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.argsort.html">
+     polars.Expr.argsort
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.sort_by.html">
+     polars.Expr.sort_by
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.take.html">
+     polars.Expr.take
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.shift.html">
+     polars.Expr.shift
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.shift_and_fill.html">
+     polars.Expr.shift_and_fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.fill_null.html">
+     polars.Expr.fill_null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.fill_nan.html">
+     polars.Expr.fill_nan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.forward_fill.html">
+     polars.Expr.forward_fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.backward_fill.html">
+     polars.Expr.backward_fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.reverse.html">
+     polars.Expr.reverse
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.filter.html">
+     polars.Expr.filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.where.html">
+     polars.Expr.where
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.head.html">
+     polars.Expr.head
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.tail.html">
+     polars.Expr.tail
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.reinterpret.html">
+     polars.Expr.reinterpret
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.drop_nulls.html">
+     polars.Expr.drop_nulls
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.drop_nans.html">
+     polars.Expr.drop_nans
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.rechunk.html">
+     polars.Expr.rechunk
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.interpolate.html">
+     polars.Expr.interpolate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.arg_sort.html">
+     polars.Expr.arg_sort
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.clip.html">
+     polars.Expr.clip
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.lower_bound.html">
+     polars.Expr.lower_bound
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.upper_bound.html">
+     polars.Expr.upper_bound
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.reshape.html">
+     polars.Expr.reshape
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.to_physical.html">
+     polars.Expr.to_physical
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.shuffle.html">
+     polars.Expr.shuffle
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.sample.html">
+     polars.Expr.sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.extend_constant.html">
+     polars.Expr.extend_constant
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.alias.html">
+     polars.Expr.alias
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.keep_name.html">
+     polars.Expr.keep_name
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.prefix.html">
+     polars.Expr.prefix
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.suffix.html">
+     polars.Expr.suffix
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.map_alias.html">
+     polars.Expr.map_alias
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.exclude.html">
+     polars.Expr.exclude
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.map.html">
+     polars.Expr.map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.apply.html">
+     polars.Expr.apply
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.over.html">
+     polars.Expr.over
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Expr.set_sorted.html">
+     polars.Expr.set_sorted
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.strftime.html">
+     polars.internals.expr.ExprDateTimeNameSpace.strftime
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.year.html">
+     polars.internals.expr.ExprDateTimeNameSpace.year
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.month.html">
+     polars.internals.expr.ExprDateTimeNameSpace.month
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.week.html">
+     polars.internals.expr.ExprDateTimeNameSpace.week
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.weekday.html">
+     polars.internals.expr.ExprDateTimeNameSpace.weekday
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.day.html">
+     polars.internals.expr.ExprDateTimeNameSpace.day
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.ordinal_day.html">
+     polars.internals.expr.ExprDateTimeNameSpace.ordinal_day
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.hour.html">
+     polars.internals.expr.ExprDateTimeNameSpace.hour
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.minute.html">
+     polars.internals.expr.ExprDateTimeNameSpace.minute
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.second.html">
+     polars.internals.expr.ExprDateTimeNameSpace.second
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.nanosecond.html">
+     polars.internals.expr.ExprDateTimeNameSpace.nanosecond
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.to_python_datetime.html">
+     polars.internals.expr.ExprDateTimeNameSpace.to_python_datetime
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.timestamp.html">
+     polars.internals.expr.ExprDateTimeNameSpace.timestamp
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.truncate.html">
+     polars.internals.expr.ExprDateTimeNameSpace.truncate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.epoch.html">
+     polars.internals.expr.ExprDateTimeNameSpace.epoch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.epoch_days.html">
+     polars.internals.expr.ExprDateTimeNameSpace.epoch_days
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.epoch_milliseconds.html">
+     polars.internals.expr.ExprDateTimeNameSpace.epoch_milliseconds
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.epoch_seconds.html">
+     polars.internals.expr.ExprDateTimeNameSpace.epoch_seconds
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.and_time_unit.html">
+     polars.internals.expr.ExprDateTimeNameSpace.and_time_unit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.and_time_zone.html">
+     polars.internals.expr.ExprDateTimeNameSpace.and_time_zone
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.with_time_unit.html">
+     polars.internals.expr.ExprDateTimeNameSpace.with_time_unit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.cast_time_unit.html">
+     polars.internals.expr.ExprDateTimeNameSpace.cast_time_unit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.days.html">
+     polars.internals.expr.ExprDateTimeNameSpace.days
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.hours.html">
+     polars.internals.expr.ExprDateTimeNameSpace.hours
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.minutes.html">
+     polars.internals.expr.ExprDateTimeNameSpace.minutes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.seconds.html">
+     polars.internals.expr.ExprDateTimeNameSpace.seconds
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.milliseconds.html">
+     polars.internals.expr.ExprDateTimeNameSpace.milliseconds
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprDateTimeNameSpace.nanoseconds.html">
+     polars.internals.expr.ExprDateTimeNameSpace.nanoseconds
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.strptime.html">
+     polars.internals.expr.ExprStringNameSpace.strptime
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.lengths.html">
+     polars.internals.expr.ExprStringNameSpace.lengths
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.to_uppercase.html">
+     polars.internals.expr.ExprStringNameSpace.to_uppercase
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.to_lowercase.html">
+     polars.internals.expr.ExprStringNameSpace.to_lowercase
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.concat.html">
+     polars.internals.expr.ExprStringNameSpace.concat
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.strip.html">
+     polars.internals.expr.ExprStringNameSpace.strip
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.lstrip.html">
+     polars.internals.expr.ExprStringNameSpace.lstrip
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.rstrip.html">
+     polars.internals.expr.ExprStringNameSpace.rstrip
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.zfill.html">
+     polars.internals.expr.ExprStringNameSpace.zfill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.ljust.html">
+     polars.internals.expr.ExprStringNameSpace.ljust
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.rjust.html">
+     polars.internals.expr.ExprStringNameSpace.rjust
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.contains.html">
+     polars.internals.expr.ExprStringNameSpace.contains
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.json_path_match.html">
+     polars.internals.expr.ExprStringNameSpace.json_path_match
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.extract.html">
+     polars.internals.expr.ExprStringNameSpace.extract
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.extract_all.html">
+     polars.internals.expr.ExprStringNameSpace.extract_all
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.count_match.html">
+     polars.internals.expr.ExprStringNameSpace.count_match
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.split.html">
+     polars.internals.expr.ExprStringNameSpace.split
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.split_exact.html">
+     polars.internals.expr.ExprStringNameSpace.split_exact
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.replace.html">
+     polars.internals.expr.ExprStringNameSpace.replace
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.replace_all.html">
+     polars.internals.expr.ExprStringNameSpace.replace_all
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.slice.html">
+     polars.internals.expr.ExprStringNameSpace.slice
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.encode.html">
+     polars.internals.expr.ExprStringNameSpace.encode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStringNameSpace.decode.html">
+     polars.internals.expr.ExprStringNameSpace.decode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.concat.html">
+     polars.internals.expr.ExprListNameSpace.concat
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.lengths.html">
+     polars.internals.expr.ExprListNameSpace.lengths
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.sum.html">
+     polars.internals.expr.ExprListNameSpace.sum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.min.html">
+     polars.internals.expr.ExprListNameSpace.min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.max.html">
+     polars.internals.expr.ExprListNameSpace.max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.mean.html">
+     polars.internals.expr.ExprListNameSpace.mean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.sort.html">
+     polars.internals.expr.ExprListNameSpace.sort
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.reverse.html">
+     polars.internals.expr.ExprListNameSpace.reverse
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.unique.html">
+     polars.internals.expr.ExprListNameSpace.unique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.get.html">
+     polars.internals.expr.ExprListNameSpace.get
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.first.html">
+     polars.internals.expr.ExprListNameSpace.first
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.last.html">
+     polars.internals.expr.ExprListNameSpace.last
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.contains.html">
+     polars.internals.expr.ExprListNameSpace.contains
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.join.html">
+     polars.internals.expr.ExprListNameSpace.join
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.arg_min.html">
+     polars.internals.expr.ExprListNameSpace.arg_min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.arg_max.html">
+     polars.internals.expr.ExprListNameSpace.arg_max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.diff.html">
+     polars.internals.expr.ExprListNameSpace.diff
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.shift.html">
+     polars.internals.expr.ExprListNameSpace.shift
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.slice.html">
+     polars.internals.expr.ExprListNameSpace.slice
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.head.html">
+     polars.internals.expr.ExprListNameSpace.head
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.tail.html">
+     polars.internals.expr.ExprListNameSpace.tail
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.to_struct.html">
+     polars.internals.expr.ExprListNameSpace.to_struct
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprListNameSpace.eval.html">
+     polars.internals.expr.ExprListNameSpace.eval
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprCatNameSpace.set_ordering.html">
+     polars.internals.expr.ExprCatNameSpace.set_ordering
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStructNameSpace.field.html">
+     polars.internals.expr.ExprStructNameSpace.field
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.expr.ExprStructNameSpace.rename_fields.html">
+     polars.internals.expr.ExprStructNameSpace.rename_fields
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../lazyframe.html">
+   LazyFrame
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.columns.html">
+     polars.LazyFrame.columns
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.dtypes.html">
+     polars.LazyFrame.dtypes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.schema.html">
+     polars.LazyFrame.schema
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.std.html">
+     polars.LazyFrame.std
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.var.html">
+     polars.LazyFrame.var
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.max.html">
+     polars.LazyFrame.max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.min.html">
+     polars.LazyFrame.min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.sum.html">
+     polars.LazyFrame.sum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.mean.html">
+     polars.LazyFrame.mean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.median.html">
+     polars.LazyFrame.median
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.quantile.html">
+     polars.LazyFrame.quantile
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.describe_plan.html">
+     polars.LazyFrame.describe_plan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.describe_optimized_plan.html">
+     polars.LazyFrame.describe_optimized_plan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.show_graph.html">
+     polars.LazyFrame.show_graph
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.with_row_count.html">
+     polars.LazyFrame.with_row_count
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.inspect.html">
+     polars.LazyFrame.inspect
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.filter.html">
+     polars.LazyFrame.filter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.select.html">
+     polars.LazyFrame.select
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.groupby.html">
+     polars.LazyFrame.groupby
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.groupby_dynamic.html">
+     polars.LazyFrame.groupby_dynamic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.groupby_rolling.html">
+     polars.LazyFrame.groupby_rolling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.join.html">
+     polars.LazyFrame.join
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.join_asof.html">
+     polars.LazyFrame.join_asof
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.with_columns.html">
+     polars.LazyFrame.with_columns
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.with_column.html">
+     polars.LazyFrame.with_column
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.drop.html">
+     polars.LazyFrame.drop
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.rename.html">
+     polars.LazyFrame.rename
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.reverse.html">
+     polars.LazyFrame.reverse
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.shift.html">
+     polars.LazyFrame.shift
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.shift_and_fill.html">
+     polars.LazyFrame.shift_and_fill
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.slice.html">
+     polars.LazyFrame.slice
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.limit.html">
+     polars.LazyFrame.limit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.head.html">
+     polars.LazyFrame.head
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.tail.html">
+     polars.LazyFrame.tail
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.last.html">
+     polars.LazyFrame.last
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.first.html">
+     polars.LazyFrame.first
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.fill_null.html">
+     polars.LazyFrame.fill_null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.fill_nan.html">
+     polars.LazyFrame.fill_nan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.explode.html">
+     polars.LazyFrame.explode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.distinct.html">
+     polars.LazyFrame.distinct
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.unique.html">
+     polars.LazyFrame.unique
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.drop_nulls.html">
+     polars.LazyFrame.drop_nulls
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.sort.html">
+     polars.LazyFrame.sort
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.melt.html">
+     polars.LazyFrame.melt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.interpolate.html">
+     polars.LazyFrame.interpolate
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.unnest.html">
+     polars.LazyFrame.unnest
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.write_json.html">
+     polars.LazyFrame.write_json
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.read_json.html">
+     polars.LazyFrame.read_json
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.from_json.html">
+     polars.LazyFrame.from_json
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.map.html">
+     polars.LazyFrame.map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.pipe.html">
+     polars.LazyFrame.pipe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.collect.html">
+     polars.LazyFrame.collect
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.fetch.html">
+     polars.LazyFrame.fetch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.LazyFrame.cache.html">
+     polars.LazyFrame.cache
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.lazy_frame.LazyGroupBy.agg.html">
+     polars.internals.lazy_frame.LazyGroupBy.agg
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.lazy_frame.LazyGroupBy.apply.html">
+     polars.internals.lazy_frame.LazyGroupBy.apply
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.lazy_frame.LazyGroupBy.head.html">
+     polars.internals.lazy_frame.LazyGroupBy.head
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.internals.lazy_frame.LazyGroupBy.tail.html">
+     polars.internals.lazy_frame.LazyGroupBy.tail
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../testing.html">
+   Testing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.testing.assert_series_equal.html">
+     polars.testing.assert_series_equal
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.testing.assert_frame_equal.html">
+     polars.testing.assert_frame_equal
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../config.html">
+   Config
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Config.set_utf8_tables.html">
+     polars.Config.set_utf8_tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Config.set_ascii_tables.html">
+     polars.Config.set_ascii_tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Config.set_tbl_width_chars.html">
+     polars.Config.set_tbl_width_chars
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Config.set_tbl_rows.html">
+     polars.Config.set_tbl_rows
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Config.set_tbl_cols.html">
+     polars.Config.set_tbl_cols
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Config.set_global_string_cache.html">
+     polars.Config.set_global_string_cache
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.Config.unset_global_string_cache.html">
+     polars.Config.unset_global_string_cache
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.toggle_string_cache.html">
+     polars.toggle_string_cache
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.StringCache.html">
+     polars.StringCache
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../datatypes.html">
+   Data Types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.DataType.html">
+     polars.datatypes.DataType
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.Float32.html">
+     polars.datatypes.Float32
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.Float64.html">
+     polars.datatypes.Float64
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.Int16.html">
+     polars.datatypes.Int16
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.Int32.html">
+     polars.datatypes.Int32
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.Int64.html">
+     polars.datatypes.Int64
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.Int8.html">
+     polars.datatypes.Int8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.UInt16.html">
+     polars.datatypes.UInt16
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.UInt32.html">
+     polars.datatypes.UInt32
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.UInt64.html">
+     polars.datatypes.UInt64
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.UInt8.html">
+     polars.datatypes.UInt8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.Date.html">
+     polars.datatypes.Date
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.Datetime.html">
+     polars.datatypes.Datetime
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.Duration.html">
+     polars.datatypes.Duration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.Time.html">
+     polars.datatypes.Time
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.List.html">
+     polars.datatypes.List
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.Struct.html">
+     polars.datatypes.Struct
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.Boolean.html">
+     polars.datatypes.Boolean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.Categorical.html">
+     polars.datatypes.Categorical
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.Null.html">
+     polars.datatypes.Null
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.Object.html">
+     polars.datatypes.Object
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.datatypes.Utf8.html">
+     polars.datatypes.Utf8
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../exceptions.html">
+   Exceptions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.exceptions.ArrowError.html">
+     polars.exceptions.ArrowError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.exceptions.ComputeError.html">
+     polars.exceptions.ComputeError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.exceptions.NoDataError.html">
+     polars.exceptions.NoDataError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.exceptions.NotFoundError.html">
+     polars.exceptions.NotFoundError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.exceptions.SchemaError.html">
+     polars.exceptions.SchemaError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.exceptions.ShapeError.html">
+     polars.exceptions.ShapeError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.exceptions.DuplicateError.html">
+     polars.exceptions.DuplicateError
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="polars.exceptions.PanicException.html">
+     polars.exceptions.PanicException
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+
+<nav id="bd-toc-nav">
+    
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="polars-series-n-unique">
+<h1>polars.Series.n_unique<a class="headerlink" href="#polars-series-n-unique" title="Permalink to this headline">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="polars.Series.n_unique">
+<span class="sig-prename descclassname"><span class="pre">Series.</span></span><span class="sig-name descname"><span class="pre">n_unique</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#polars.Series.n_unique" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count the number of unique values in this Series.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">n_unique</span><span class="p">()</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="polars.Series.n_chunks.html" title="previous page">polars.Series.n_chunks</a>
+    <a class='right-next' id="next-link" href="polars.Series.null_count.html" title="next page">polars.Series.null_count</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Ritchie Vink.<br/>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

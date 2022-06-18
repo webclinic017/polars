@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["ndjson","APIs to read from and write to NDJSON"]],"struct":[["JsonLineReader",""],["StructArray","A [`StructArray`] is a nested [`Array`] with an optional validity representing multiple [`Array`] with the same number of rows."]]});
